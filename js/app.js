@@ -39,7 +39,7 @@ $.get('./data/page-1.json', data => {
   });
 });
 
-$('select').on('change', function (event) {
+$('select').on('change', function () {
   $('section').hide();
   picarr.forEach(pic => {
     if (this.value === pic.keyword) {
