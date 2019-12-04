@@ -1,22 +1,27 @@
 'use strict';
 const picarr = [];
+const keywordArr = [];
 
 function Pic(picObj) {
   this.title = picObj.title;
   this.description = picObj.description;
-  this.keyWord = picObj.keyWord;
+  this.keyword = picObj.keyword;
+  // keywordArr.push(picObj.keyword);
   this.horns = picObj.horns;
   this.image_url = picObj.image_url;
   picarr.push(this);
 };
 
+
+
 Pic.prototype.render = function () {
   const picTemplate = $('#pic-template').html();
   const $newSection = $('<section></section>');
+  $newSection.find('section').addClass(this.keyword);
   $newSection.html(picTemplate);
   $newSection.find('h2').text(this.title);
   $newSection.find('img').attr('src', this.image_url);
-  $newSection.find('img').attr('alt', this.keyWord);
+  $newSection.find('img').attr('alt', this.keyword);
   $newSection.find('p').text(this.description);
   $('main').append($newSection);
 };
@@ -24,5 +29,16 @@ Pic.prototype.render = function () {
 $.get('./data/page-1.json', data => {
   data.forEach(pic => {
     new Pic(pic).render();
+
+    if (!keywordArr.includes(pic.keyword)) {
+      keywordArr.push(pic.keyword);
+    }
   });
+  console.log(keywordArr);
 });
+
+// keywordArr.forEach(i => {
+//   $('select').append(`<option>${i}</option>`);
+//   console.log(i);
+// });
+
