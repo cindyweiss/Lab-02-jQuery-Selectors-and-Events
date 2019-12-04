@@ -34,11 +34,9 @@ $.get('./data/page-1.json', data => {
       keywordArr.push(pic.keyword);
     }
   });
-  console.log(keywordArr);
+  keywordArr.forEach(i => {
+    $('select').append(`<option>${i}</option>`);
+  });
 });
 
-// keywordArr.forEach(i => {
-//   $('select').append(`<option>${i}</option>`);
-//   console.log(i);
-// });
-
+// name separate later
